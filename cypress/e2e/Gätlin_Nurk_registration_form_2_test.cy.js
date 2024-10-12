@@ -3,7 +3,7 @@ beforeEach(() => {
 })
 
 /*
-Assignement 4: add content to the following tests
+Assignment 4: add content to the following tests
 */
 
 describe('Section 1: Functional tests', () => {
@@ -21,7 +21,6 @@ describe('Section 1: Functional tests', () => {
         cy.get('h2').contains('Password section').click()
         cy.get('#password_error_message').should('not.be.visible')
         cy.get('.submit_button').should('be.enabled')
-
 
         // Add test steps for filling in only mandatory fields
         // Type confirmation password which is different from first password
@@ -73,9 +72,8 @@ describe('Section 1: Functional tests', () => {
 
 })
 
-
 /*
-Assignement 5: create more visual tests
+Assignment 5: create more visual tests
 */
 
 describe('Section 2: Visual tests', () => {
@@ -97,7 +95,7 @@ describe('Section 2: Visual tests', () => {
         .and('be.greaterThan', 85)
 
         // Create similar test for checking the second picture
-    });
+    })
 
     it('Check first navigation part', () => {
         cy.get('nav').children().should('have.length', 2)
@@ -207,6 +205,7 @@ describe('Section 2: Visual tests', () => {
         cy.get('#animal').find('option').then(options => {
             const actual = [...options].map(option => option.value)
             expect(actual).to.deep.eq(['dog', 'cat', 'snake', 'hippo', 'cow', 'mouse'])
+        // Value='mouse' written incorrectly (bug), should be: 'horse'
 
         // Create test similar to previous one
         })      

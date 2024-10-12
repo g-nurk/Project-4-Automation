@@ -38,29 +38,69 @@ describe('Section 1: Visual tests', () => {
     cy.get('input[type="radio"]').eq(0).should('not.be.checked')
     })
 
-    it('Check the dropdown and dependencies', () => {
+    it('Check the countries dropdown', () => {
     cy.get('#country').children().should('have.length', 4)
     cy.get('#country').find('option').eq(0).should('have.text', '')
     cy.get('#country').find('option').eq(1).should('have.text', 'Spain')
     cy.get('#country').find('option').eq(2).should('have.text', 'Estonia')
     cy.get('#country').find('option').eq(3).should('have.text', 'Austria')
-    cy.get('#country').select('Spain')
-    cy.get('#city').select('Madrid')
-    //cy.get('#country').select('Estonia')
-    //cy.get('#city').select('Haapsalu')
-    cy.get('body').click()
-    })      
+    cy.get('#city').should('be.disabled')
+    })    
 
-    //ei oska 
+    it('Check the dropdown and dependencies for Spain', () => {
+    const SpainCities = ['', 'Malaga', 'Madrid', 'Valencia', 'Corralejo']
+    cy.get('#country').select(1)
+    cy.get('#city').find('option').should('have.length', 5)
+    SpainCities.forEach((country, index) => {
+    cy.get('#city').find('option').eq(index).should('have.text', country)
+    })
+})
+
+    it('Check the dropdown and dependencies for Estonia', () => {
+    const EstonianCities = ['', 'Tallinn', 'Haapsalu', 'Tartu']
+    cy.get('#country').select(2)
+    cy.get('#city').find('option').should('have.length', 4)
+    EstonianCities.forEach((country, index) => {
+    cy.get('#city').find('option').eq(index).should('have.text', country)
+    })
+ })
+ it('Check the dropdown and dependencies for Austria', () => {
+    const AustrianCities = ['', 'Vienna', 'Salzburg', 'Innsbruck']
+    cy.get('#country').select(3)
+    cy.get('#city').find('option').should('have.length', 4)
+    AustrianCities.forEach((country, index) => {
+    cy.get('#city').find('option').eq(index).should('have.text', country)
+})
+ })
+
+ it('Check that city choice is removed', () => {
+    cy.get('#country').select(3)
+    cy.get('#city').select(3)
+    cy.get('#country').select(2)
+    cy.get('#city').should('have.class', 'ng-invalid')
+})
+
+
     it('Check that checbox list is correct', () => {
+        cy.get('input[type="checkbox"]').should('have.length', 2)
+        cy.get('input[type="checkbox"]').eq(0).should('not.be.checked').siblings().should('contain', 'Accept our cookie policy')
+        cy.get('input[type="checkbox"]').eq(1).should('not.be.checked').parent().find('button a').should('have.attr', 'href', 'cookiePolicy.html')
+        cy.get('input[type="checkbox"]').eq(1).parent().find('button a').click()
+        cy.url().should('contain', '/cookiePolicy.html')
+        cy.go('back')
+        cy.log('Back again in registration form 3')
     })
 
-    //ei oska
     it('Check that the email format is correct', () => {
-        //cy.get('input[name="email"]').should('contain', '[a-z0-9]+@[a-z0-9]+\\.[a-z]{2,4}$')
+        cy.get('input[name="email"]').should('exist').should('be.enabled')
+        cy.get('label[for="email"]').should('contain.text', 'Email')
+        cy.get('span').contains('Email is required.').should('not.be.visible')
+        cy.get('span').contains('Invalid email address.').should('not.be.visible')
         cy.get('input[name="email"]').type('invalid')
-        //cy.get('#input_error_message').should('be.visible').should('contain', 'Invalid email address.')
-        //cy.get('ng-show="myForm.email.$error.email').should('be.visible').should('contain', 'Invalid email address.')
+        cy.get('h1').contains('Registration page')
+        cy.get('span').contains('Invalid email address.').should('be.visible')
+        cy.get('input[name="email"]').clear()
+        cy.get('span').contains('Email is required.').should('be.visible')
     })
 })
 
@@ -74,3 +114,30 @@ Task list:
     * mandatory fields are absent + corresponding assertions (try using function)
     * add file functionlity(google yourself for solution!)
  */
+
+it('Check that user can register with all fields filled', () => {
+    cy.get('#name').type('GTest')
+    cy.get('input[name="email"]').type('email@email.com')
+    cy.get('#country').select(3)
+    cy.get('#city').select(3)
+    cy.get('input[type="date"]')
+    cy.get('#successFrame').siblings('input[type="submit"]').should('not.be.disabled')
+    cy.get('#successFrame').siblings('input[type="submit"]').click()
+    cy.get('#successFrame').should('be.visible').and('contain', 'Successful registration')  
+    //error and because of that I will leave it undone
+})
+it('Check that user can register with only mandatory fields filled', () => {
+    cy.get('#name').type('GTest')
+    cy.get('input[name="email"]').type('email@email.com')
+    cy.get('#successFrame').siblings('input[type="submit"]').should('not.be.disabled')
+    cy.get('#successFrame').siblings('input[type="submit"]').click()
+    cy.get('#successFrame').should('be.visible').and('contain', 'Successful registration')
+    //error and because of that I will leave it undone
+})
+it('Check that user cannot register without mandatory section', () => {
+})
+//since I have errors everywhere I do not know how to do that
+
+it('Check that user can add a file', () => {
+//very confused, waiting for a solution to be provided
+})

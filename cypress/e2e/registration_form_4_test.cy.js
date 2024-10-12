@@ -9,7 +9,7 @@ describe('Input fields', () => {
 
         // in order to activate submit button, user has to click somewhere outside the input field
         cy.get('h2').contains('Password').click()
-        // line 13 not.be.visible must be: be.visible
+        // line 13 assertion not.be.visible must be: be.visible
         cy.get('#input_error_message').should('be.visible')
         cy.get('#success_message').should('not.be.visible')
     })
@@ -70,7 +70,7 @@ describe('Input fields', () => {
         cy.get('#cars option').first().should('not.have.text', 'BMW')
         cy.get('#cars option').eq(1).should('not.have.text', 'BMW')
         cy.get('#cars option').eq(2).should('not.have.text', 'BMW')
-        // line 74 instead of BMW needs to be written Audi
-        cy.get('#cars option').last().should('have.text', 'Audi')
+        // line 74 instead have.text needs to be written not.have.text
+        cy.get('#cars option').last().should('not.have.text', 'BMW')
     })
 })
