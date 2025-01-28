@@ -1,4 +1,4 @@
-From the project 4 at Cerebrum Hub, all work was individual. Project 4 was called: “Automating testing of Registration Forms with Cypress”. In that project we had a web page that consists of different registration forms which allow people to enter their data for registering as users for that page.
+From project 4 at Cerebrum Hub, all work was individual. Project 4 was called: “Automating testing of Registration Forms with Cypress”. In that project we had a web page that consists of different registration forms which allow people to enter their data for registering as users for that page.
 
 We had 3 registration form pages; page 1 – only basic UI elements (input fields, submission buttons); page 2 – more elements, like radio buttons, checkboxes and drop-downs and page 3 was more difficult in layout and styling.
 
