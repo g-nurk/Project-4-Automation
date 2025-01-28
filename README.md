@@ -1,3 +1,20 @@
+From the project 4 at Cerebrum Hub, all work was individual. Project 4 was called: “Automating testing of Registration Forms with Cypress”. In that project we had a web page that consists of different registration forms which allow people to enter their data for registering as users for that page.
+
+We had 3 registration form pages; page 1 – only basic UI elements (input fields, submission buttons); page 2 – more elements, like radio buttons, checkboxes and drop-downs and page 3 was more difficult in layout and styling.
+
+The registration forms were partially covered by the automation tests but some negative and positive test scenarios were not covered. Registration form 1 needed more test scenarios, so did registration form 2 but also, there I needed to update visual tests in order to cover all complex UI elements.
+
+For example, in registration form 1: 'User can submit data only when valid mandatory values are added', for registration form 2: 'User can use only same both first and validation passwords', for registration form 3: 'Check that radio button list is correct'
+
+In addition, I needed to run the registration form 2 in Cypress to see which tests are failing and then understand how to fix them and then do it (goal: failed tests are fixed and run without errors).
+For writing the code, we used VS Code, to run the code, we used Cypress. To find correct selectors, use correct assertions and make writing code easier, we used developer tools. 
+
+In summary, project 4 was an introduction to automation testing.
+
+I was victorious, leading to 100% result in project 4.
+
+
+
 # Cypress simple tests
 Tests written for basic HTML, CSS and JavaScript project. For reporting Allure is configured.
 
